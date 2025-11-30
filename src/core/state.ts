@@ -1,4 +1,4 @@
-import { ServiceState } from "../types/service-state";
+import { ServiceState } from "../types/serviceState";
 
 const HealthState = {
   state: "starting" as ServiceState,

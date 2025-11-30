@@ -4,6 +4,11 @@ process.loadEnvFile();
 const envSchema = z.object({
   // DB
   MONGO_URI: z.string().startsWith("mongodb://"),
+  MONGO_SERVER_SELECTION_TIMEOUT_MS: z.coerce.number(),
+  MONGO_CONNECT_TIMEOUT_MS: z.coerce.number(),
+  MONGO_SOCKET_TIMEOUT_MS: z.coerce.number(),
+  MONGO_MIN_POOL_SIZE: z.coerce.number(),
+  MONGO_MAX_POOL_SIZE: z.coerce.number(),
 
   // Server port
   PORT: z.coerce.number(),
