@@ -62,7 +62,6 @@ curl -s http://localhost:3000/api/readyz | jq
 │   │   └── serviceState.ts
 │   ├── index.ts
 │   └── server.ts
-├── .DS_Store
 ├── .env
 ├── .env.example
 ├── .gitignore
