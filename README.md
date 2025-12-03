@@ -14,7 +14,7 @@ It showcases proper **liveness** and **readiness** probes, internal service stat
 - Node.js (version 24) & pnpm.
 - Docker and Docker Compose or MongoDB (local).
 
-## Setup project
+## Setup Project
 
 1. Install dependencies `pnpm install`.
 2. Run `docker compose up -d` to setup MongoDB.
@@ -39,7 +39,37 @@ curl -s http://localhost:3000/api/livez | jq
 curl -s http://localhost:3000/api/readyz | jq
 ```
 
-## Stop project
+## Stop Project
 
 1. Stop server `Ctrl + c`.
 2. Stop docker `docker compose stop`.
+
+## Project Structure
+
+```bash
+.
+├── src
+│   ├── core
+│   │   └── state.ts
+│   ├── db
+│   │   ├── db.ts
+│   │   ├── mongoOptions.ts
+│   │   └── mongoState.ts
+│   ├── routes
+│   │   └── healthRoutes.ts
+│   ├── types
+│   │   ├── mongoState.ts
+│   │   └── serviceState.ts
+│   ├── index.ts
+│   └── server.ts
+├── .DS_Store
+├── .env
+├── .env.example
+├── .gitignore
+├── docker-compose.yaml
+├── env.ts
+├── package.json
+├── pnpm-lock.yaml
+├── README.md
+└── tsconfig.json
+```
