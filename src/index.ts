@@ -1,12 +1,27 @@
-import express, { Application, Request, Response } from "express";
+import { app } from "./server";
 import { env } from "../env";
+import { HealthState } from "./core/state";
+import { db } from "./db/db";
+import { MongoState } from "./db/mongoState";
 
-const app: Application = express();
+async function bootstrap() {
+  HealthState.set("starting");
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Hello, world" });
-});
+  try {
+    await db.connect();
+    console.log("[bootstrap] Mongo connected. MongoState:", MongoState.get());
+    HealthState.set("ready");
+  } catch (error) {
+    console.error("[bootstrap] Failed to connect to Mongo:", error);
+    HealthState.set("starting");
+  }
 
-app.listen(env.PORT, () => {
-  console.log(`Server is running on port ${env.PORT}`);
+  app.listen(env.PORT, () => {
+    console.log(`Server is running on port ${env.PORT}`);
+  });
+}
+
+bootstrap().catch((err) => {
+  console.error("[bootstrap] Unexpected error during startup:", err);
+  process.exit(1);
 });
